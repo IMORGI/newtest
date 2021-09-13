@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>База данных Walrus MagicЫ</title>
+  <script
+          src="https://code.jquery.com/jquery-3.6.0.min.js"
+          integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+          crossorigin="anonymous"></script>
+<h1 align="center">Добавить Данные</h1>
+</head>
+<body>
+
+<table class="table table-dark" >
+    <tbody class="thhead">
+    <tr>
+        <th> ID</th>
+        <th> Имя персонажа</th>
+        <th> Описание</th>
+        <th> Регион</th>
+        <th> Роль</th>
+        <th> Сложность</th>
+        <th> Цена</th>
+        <th> Тип урона</th>
+    </tr>
+    </tbody>
+
+
+
+    <form action="MainPHP.php" method="POST">
+
+
+<div id = "container"></div>
+
+<div align="center">
+<p><b>Имя персонажа</b>
+<input type="text" name="name" class="name">
+    <b>Описание</b>
+<input type="text" name="description" class="description">
+
+    <b>Регион</b>
+    <select name="regions" class="regions">
+        <option disabled>Выберите Регион</option>
+        <option value="1">Ноксус</option>
+        <option value="2">Демасия</option>
+        <option value="3">Фреьйорд</option>
+        <option value="4">Пилтвотер и Заун</option>
+        <option value="5">Иония</option>
+        <option value="6">Билджвотер</option>
+        <option value="7">Сумрачные острова</option>
+        <option value="8">Шурима</option>
+        <option value="9">Ишталь</option>
+        <option value="10">Таргон</option>
+    </select>
+
+    <b>Роль</b>
+    <select name="role" class="role">
+        <option disabled>Выберите Роль</option>
+        <option value="1">Убийца</option>
+        <option value="2">Штурман</option>
+        <option value="3">Хранитель</option>
+        <option value="4">Чародей</option>
+        <option value="5">Уникум</option>
+        <option value="6">Стрелок</option>
+        <option value="7">Джагернаут</option>
+        <option value="8">Дуэлянт</option>
+        <option value="9">Ловец</option>
+        <option value="10">Боевой Маг</option>
+        <option value="11">Маг Артелерист</option>
+        <option value="12">Маг Артелерист</option>
+    </select>
+
+    <b>Сложность</b>
+    <select name="difficult" class="difficult">
+        <option disabled>Выберите Сложность</option>
+        <option value="1">Легкая</option>
+        <option value="2">Средняя</option>
+        <option value="3">Тяжелая</option>
+    </select>
+
+    <b>Цена</b>
+    <select name="price" class="price">
+        <option disabled>Выберите цену</option>
+        <option value="1">7800</option>
+        <option value="2">6300</option>
+        <option value="3">4800</option>
+        <option value="4">3150</option>
+        <option value="5">1350</option>
+        <option value="6">450</option>
+    </select>
+
+    <b>Тип урона</b>
+    <select name="typeDamage" class="typeDamage">
+        <option disabled>Выберите тип урона</option>
+        <option value="1">Физический</option>
+        <option value="2">Магический</option>
+
+    </select>
+
+</p>
+<button class="send">Готово</button>
+</div>
+    </form>
+<script>$(document).ready(function (){ //функция выполнится только после загрузки страницы
+    alert('hello');
+    $('button.send').on('click', function () { //ссылаемся на нашу кнопку с классом сенд, функция произойдет когда кликнем по кнопке
+
+        var nameValue = $('input.name').val();// тоже самое
+        var descriptionValue = $('input.description').val(); // получение значения из инпутов, по их тегам класса и запись в переменную
+        var regionsValue = $('input.regions').val();
+        var roleValue = $('input.role').val();
+        var difficultValue = $('input.difficult').val();
+        var priceValue = $('input.price').val();
+        var typeDamageValue = $('input.typeDamage').val();
+
+
+        $.ajax({
+            method: "POST", //метод передачи данных
+            url: "MainPHP.php", //куда передаёт данные
+            data: {name: nameValue, description: descriptionValue, regions: regionsValue, role: roleValue, difficult: difficultValue, price: priceValue, typeDamage: typeDamageValue} // какие данные передает
+        })
+            .done(function( msg ) { // получение результата отправки
+                document.write( msg ); // вывод данных на страницу
+                alert(msg);
+            });
+
+        $('input.name').val(''); //обнуляем данные
+        $('input.description').val(''); //обнуляем данные
+    })
+})</script>
+
+</body>
+</html>
