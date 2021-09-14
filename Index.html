@@ -19,7 +19,7 @@
         <th> Описание</th>
         <th> Регион</th>
         <th> Роль</th>
-        <th> Сложность</th>
+
         <th> Цена</th>
         <th> Тип урона</th>
     </tr>
@@ -70,13 +70,7 @@
         <option value="12">Маг Артелерист</option>
     </select>
 
-    <b>Сложность</b>
-    <select name="difficult" class="difficult">
-        <option disabled>Выберите Сложность</option>
-        <option value="1">Легкая</option>
-        <option value="2">Средняя</option>
-        <option value="3">Тяжелая</option>
-    </select>
+
 
     <b>Цена</b>
     <select name="price" class="price">
@@ -101,6 +95,10 @@
 <button class="send">Готово</button>
 </div>
     </form>
+</table>
+
+
+
 <script>$(document).ready(function (){ //функция выполнится только после загрузки страницы
     alert('hello');
     $('button.send').on('click', function () { //ссылаемся на нашу кнопку с классом сенд, функция произойдет когда кликнем по кнопке
@@ -112,6 +110,7 @@
         var difficultValue = $('input.difficult').val();
         var priceValue = $('input.price').val();
         var typeDamageValue = $('input.typeDamage').val();
+
 
 
         $.ajax({
