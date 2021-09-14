@@ -11,23 +11,11 @@
 </head>
 <body>
 
-<table class="table table-dark" >
-    <tbody class="thhead">
-    <tr>
-        <th> ID</th>
-        <th> Имя персонажа</th>
-        <th> Описание</th>
-        <th> Регион</th>
-        <th> Роль</th>
-
-        <th> Цена</th>
-        <th> Тип урона</th>
-    </tr>
-    </tbody>
 
 
 
-    <form action="MainPHP.php" method="POST">
+
+    <form action="MainPHP.php" id="addform" method="POST">
 
 
 <div id = "container"></div>
@@ -92,17 +80,18 @@
     </select>
 
 </p>
-<button class="send">Готово</button>
+<button type="submit" class="send">Готово</button>
 </div>
     </form>
-</table>
 
+<div id="viewform">
+</div>
 
 
 <script>$(document).ready(function (){ //функция выполнится только после загрузки страницы
-    alert('hello');
-    $('button.send').on('click', function () { //ссылаемся на нашу кнопку с классом сенд, функция произойдет когда кликнем по кнопке
-
+  console.log('hello');
+//ссылаемся на нашу кнопку с классом сенд, функция произойдет когда кликнем по кнопке
+        $("#addform").submit(function(e) {
         var nameValue = $('input.name').val();// тоже самое
         var descriptionValue = $('input.description').val(); // получение значения из инпутов, по их тегам класса и запись в переменную
         var regionsValue = $('input.regions').val();
@@ -110,17 +99,25 @@
         var difficultValue = $('input.difficult').val();
         var priceValue = $('input.price').val();
         var typeDamageValue = $('input.typeDamage').val();
+            e.preventDefault(); // avoid to execute the actual submit of the form.
 
+            var form = $(this);
 
+            var $forms=form.serialize();
+console.log($forms);
 
         $.ajax({
             method: "POST", //метод передачи данных
             url: "MainPHP.php", //куда передаёт данные
-            data: {name: nameValue, description: descriptionValue, regions: regionsValue, role: roleValue, difficult: difficultValue, price: priceValue, typeDamage: typeDamageValue} // какие данные передает
+            data: $forms // какие данные передает
         })
             .done(function( msg ) { // получение результата отправки
-                document.write( msg ); // вывод данных на страницу
-                alert(msg);
+
+                var msgs=$(msg);
+
+                $('#viewform').html(msgs);
+
+
             });
 
         $('input.name').val(''); //обнуляем данные
